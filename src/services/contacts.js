@@ -1,4 +1,5 @@
 import { SORT_ORDER } from '../constants/index.js';
+import createHttpError from 'http-errors';
 import { ContactsCollection } from '../db/models/contact.js';
 import { calculatePaginationData } from '../utils/calculatePaginationData.js';
 
@@ -24,8 +25,13 @@ export const getAllContacts = async ({ page = 1,
 };
 
 export const getContactById = async (contactId) => {
+  try { 
   const contact = await ContactsCollection.findById(contactId);
   return contact;
+  } catch (error) {
+    throw new createHttpError(404, 'Contact not found');
+  }
+
 };
 
 export const createContact = async (payload) => {
@@ -34,27 +40,33 @@ export const createContact = async (payload) => {
 };
 
 export const updateContact = async (contactId, payload, options = {}) => {
-  const rawResult = await ContactsCollection.findOneAndUpdate(
-    { _id: contactId },
-    payload,
-    {
-      new: true,
-      includeResultMetadata: true,
-      ...options,
-    },
-  );
-
-  if (!rawResult || !rawResult.value) return null;
-
-  return {
-    contact: rawResult.value,
-    isNew: Boolean(rawResult?.lastErrorObject?.upserted),
-  };
+  try {
+    const rawResult = await ContactsCollection.findOneAndUpdate(
+      { _id: contactId },
+      payload,
+      {
+        new: true,
+        includeResultMetadata: true,
+        ...options,
+      },
+    );
+    if (!rawResult || !rawResult.value) return null;
+  
+    return {
+      contact: rawResult.value,
+      isNew: Boolean(rawResult?.lastErrorObject?.upserted),
+    };
+  } catch (error) {
+    throw new createHttpError(404, 'Contact not found');
+  }
+  
 };
 
 export const deleteContact = async (contactId) => {
-  console.log(contactId);
+  try {
   const contact = await ContactsCollection.findByIdAndDelete(contactId);
-  console.log(contactId);
   return contact;
+  } catch (error) {
+    throw new createHttpError(404, 'Contact not found');
+  }
 };
