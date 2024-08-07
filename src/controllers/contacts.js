@@ -22,9 +22,12 @@ export const getAllContactsController = async (req, res) => {
     sortOrder,
     filter,
   });
+  const message = contacts.data.length
+    ? 'Successfully found contacts!'
+    : 'Sorry, we could not find contacts on your request.';
   res.status(200).json({
     status: 200,
-    message: 'Successfully found contacts!',
+    message,
     data: contacts,
   });
 };
