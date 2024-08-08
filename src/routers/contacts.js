@@ -23,7 +23,12 @@ router.post(
   ctrlWrapper(createContactController),
 );
 
-router.patch('/:contactId', isValidId, ctrlWrapper(patchContactController));
+router.patch(
+  '/:contactId',
+  isValidId,
+  validateBody(createContactSchema),
+  ctrlWrapper(patchContactController),
+);
 
 router.delete('/:contactId', isValidId, ctrlWrapper(deleteContactController));
 
