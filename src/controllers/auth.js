@@ -9,8 +9,6 @@ import {
 export const registerUserController = async (req, res) => {
   const user = await registerUser(req.body);
 
-  console.log('user data: ', user);
-
   res.status(201).json({
     status: 201,
     message: 'Successfully registered a user!',
@@ -20,8 +18,6 @@ export const registerUserController = async (req, res) => {
 
 export const loginUserController = async (req, res) => {
   const session = await loginUser(req.body);
-  console.log('session refresh token:', session.refreshToken);
-  console.log('session Id: ', session._id);
 
   res.cookie('refreshToken', session.refreshToken, {
     httpOnly: true,
@@ -47,10 +43,6 @@ export const logoutUserController = async (req, res) => {
   if (typeof sessionId === 'string') {
     await logoutUser(sessionId);
   }
-
-  //   if (req.cookies.sessionId) {
-  //     await logoutUser(req.cookies.sessionId);
-  //   }
 
   res.clearCookie('sessionId');
   res.clearCookie('refreshToken');

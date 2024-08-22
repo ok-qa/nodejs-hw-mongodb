@@ -25,6 +25,10 @@ export const contactSchema = new Schema(
       enum: CONTACT_TYPE_VALUES,
       default: 'personal',
     },
+    userId: {
+      type: Schema.Types.ObjectId,
+      ref: 'users',
+    },
   },
   {
     timestamps: true,
@@ -33,4 +37,3 @@ export const contactSchema = new Schema(
 );
 
 export const ContactsCollection = model('contacts', contactSchema);
-

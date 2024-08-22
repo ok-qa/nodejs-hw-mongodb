@@ -10,13 +10,11 @@ export const registerUser = async (payload) => {
   if (user) throw createHttpError(409, 'Email in use');
 
   const encryptedPassword = await bcrypt.hash(payload.password, 10);
-  console.log('payload', payload);
 
   const newUser = await UsersCollection.create({
     ...payload,
     password: encryptedPassword,
   });
-  console.log('new user: ', newUser);
   return newUser;
 };
 
@@ -35,8 +33,6 @@ export const loginUser = async (payload) => {
 
   const accessToken = randomBytes(30).toString('base64');
   const refreshToken = randomBytes(30).toString('base64');
-
-  console.log('refreshed token: ', refreshToken);
 
   return await SessionsCollection.create({
     userId: user._id,
