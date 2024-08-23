@@ -19,14 +19,9 @@ import { checkContactUser } from '../middlewares/checkContactUser.js';
 const router = Router();
 router.use(authenticate);
 
-router.get('/', checkContactUser, ctrlWrapper(getAllContactsController));
+router.get('/', ctrlWrapper(getAllContactsController));
 
-router.get(
-  '/:contactId',
-  checkContactUser,
-  isValidId,
-  ctrlWrapper(getContactByIdController),
-);
+router.get('/:contactId', isValidId, ctrlWrapper(getContactByIdController));
 
 router.post(
   '/',
@@ -36,17 +31,11 @@ router.post(
 
 router.patch(
   '/:contactId',
-  checkContactUser,
   isValidId,
   validateBody(updateContactSchema),
   ctrlWrapper(patchContactController),
 );
 
-router.delete(
-  '/:contactId',
-  checkContactUser,
-  isValidId,
-  ctrlWrapper(deleteContactController),
-);
+router.delete('/:contactId', isValidId, ctrlWrapper(deleteContactController));
 
 export default router;
