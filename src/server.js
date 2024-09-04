@@ -35,6 +35,8 @@ const setupServer = () => {
 
   app.use('/uploads', express.static(UPLOAD_DIR));
 
+  console.log('uploaded to the ', UPLOAD_DIR);
+
   app.listen(PORT, () => {
     console.log(`Server is running on port ${PORT}`);
   });
