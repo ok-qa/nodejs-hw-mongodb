@@ -11,7 +11,6 @@ export const checkContactUser = async (req, res, next) => {
 
   const { contactId } = req.params;
   if (!contactId) {
-    console.log('first check: contactId');
     next(createHttpError(403));
     return;
   }
@@ -25,7 +24,5 @@ export const checkContactUser = async (req, res, next) => {
     next();
     return;
   }
-  console.log('second check, contactId: ', contactId);
-  console.log('second check, userId: ', user._id);
   next(createHttpError(403));
 };

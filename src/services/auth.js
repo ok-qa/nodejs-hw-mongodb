@@ -140,8 +140,6 @@ export const requestResetToken = async (email) => {
 
 export const resetPassword = async (payload) => {
   let entries;
-  console.log(payload.token);
-  console.log(process.env.JWT_SECRET);
 
   try {
     entries = jwt.verify(payload.token, process.env.JWT_SECRET);
