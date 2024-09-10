@@ -512,7 +512,7 @@
           "name": {
             "description": "Contacts name",
             "type": "string",
-            "example": "Noema Jean"
+            "example": "Norma Jean"
           },
           "phoneNumber": {
             "description": "Contacts phonenumber",
