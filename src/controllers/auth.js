@@ -101,26 +101,26 @@ export const resetPasswordController = async (req, res) => {
   });
 };
 
-export const getGoogleOAuthUrlController = async (req, res) => {
-  const url = generateAuthUrl();
-  res.json({
-    stetus: 200,
-    message: 'Successfully get Google OAuth url!',
-    data: {
-      url,
-    },
-  });
-};
+// export const getGoogleOAuthUrlController = async (req, res) => {
+//   const url = generateAuthUrl();
+//   res.json({
+//     stetus: 200,
+//     message: 'Successfully get Google OAuth url!',
+//     data: {
+//       url,
+//     },
+//   });
+// };
 
-export const loginWithGoogleController = async (req, res) => {
-  const session = await loginOrSignupWithGoogle(req.body.code);
-  setupSession(res, session);
+// export const loginWithGoogleController = async (req, res) => {
+//   const session = await loginOrSignupWithGoogle(req.body.code);
+//   setupSession(res, session);
 
-  res.json({
-    status: 200,
-    message: 'Successfully logged in via Google OAuth!',
-    data: {
-      accessToken: session.accessToken,
-    },
-  });
-};
+//   res.json({
+//     status: 200,
+//     message: 'Successfully logged in via Google OAuth!',
+//     data: {
+//       accessToken: session.accessToken,
+//     },
+//   });
+// };

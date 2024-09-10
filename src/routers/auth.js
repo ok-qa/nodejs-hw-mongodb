@@ -46,9 +46,9 @@ router.post(
   ctrlWrapper(resetPasswordController),
 );
 
-router.get(
-  '/confirm-google-auth',
-  validateBody(loginWithGoogleOAuthSchema),
-  ctrlWrapper(getGoogleOAuthUrlController),
-);
+// router.get(
+//   '/confirm-google-auth',
+//   validateBody(loginWithGoogleOAuthSchema),
+//   ctrlWrapper(getGoogleOAuthUrlController),
+// );
 export default router;
